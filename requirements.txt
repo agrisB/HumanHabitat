@@ -1,0 +1,10 @@
+numpy
+pandas
+streamlit
+rasterio==1.2.6
+rioxarray
+matplotlib
+folium==0.12.1
+streamlit-folium==0.4.0
+branca
+altair==4.1.0
