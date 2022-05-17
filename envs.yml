@@ -1,0 +1,12 @@
+name: base
+channels:
+  - conda-forge
+dependencies:
+  - gdal=3.2.2
+  - pip
+  - pip:
+      - geopandas
+      - streamlit
+      - streamlit-folium=0.4.0
+      - rasterio
+      
