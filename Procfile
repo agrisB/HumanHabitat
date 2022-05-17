@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run hh3.py
+web: sh setup.sh && streamlit run hhv3.py
