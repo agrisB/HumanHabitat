@@ -40,7 +40,7 @@ neg_factors = st.sidebar.multiselect('Negatīvie faktori (-1):', data_keys)
 
 # Creating layer for display from factors
 
-A = rxr.open_rasterio('Layers/10301.tif').squeeze()
+A = rxr.open_rasterio('Layers/10301.png').squeeze()
 A.data[A.data>=0]=0
 A = A.astype(np.float64)
 n = 0
