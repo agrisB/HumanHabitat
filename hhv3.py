@@ -41,6 +41,7 @@ neg_factors = st.sidebar.multiselect('Negatīvie faktori (-1):', data_keys)
 # Creating layer for display from factors
 
 A = rxr.open_rasterio('Layers/10301.png').squeeze()
+A1 = rxr.open_rasterio('Layers/10301.tif').squeeze()
 A.data[A.data>=0]=0
 A = A.astype(np.float64)
 n = 0
@@ -66,7 +67,7 @@ A_rgb = cm1(A)
 st.sidebar.markdown("## Vizualizāciju izvēlne")
 A_thresh = st.sidebar.slider('Slieksnis datu vizualizēšanai:', min_value = 0, max_value = 100, value = 0)
 A_rgb[:,:,3] = A.data>(2.55*A_thresh)
-A_bounds = A.rio.bounds(recalc=True)
+A_bounds = A1.rio.bounds(recalc=True)
   
 
 #Displaying results
