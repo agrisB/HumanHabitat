@@ -94,7 +94,7 @@ map1.add_child(colormap)
 
 
 
-field_locations = r"Layers\Cesis_kad.geojson"
+field_locations = r"Layers\Cesis_kad4.geojson"
 
 road_locations = r"Layers\Cesis_road4.geojson"
 
