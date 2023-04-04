@@ -40,8 +40,7 @@ neg_factors = st.sidebar.multiselect('Negatīvie faktori (-1):', data_keys)
 
 # Creating layer for display from factors
 
-A = rxr.open_rasterio('Layers/10301.png').squeeze()
-A1 = rxr.open_rasterio('Layers/10301.tif').squeeze()
+A = rxr.open_rasterio('Layers/10301.tif').squeeze()
 A.data[A.data>=0]=0
 A = A.astype(np.float64)
 n = 0
@@ -67,7 +66,7 @@ A_rgb = cm1(A)
 st.sidebar.markdown("## Vizualizāciju izvēlne")
 A_thresh = st.sidebar.slider('Slieksnis datu vizualizēšanai:', min_value = 0, max_value = 100, value = 0)
 A_rgb[:,:,3] = A.data>(2.55*A_thresh)
-A_bounds = A1.rio.bounds(recalc=True)
+A_bounds = A.rio.bounds(recalc=True)
   
 
 #Displaying results
@@ -81,7 +80,7 @@ EsriAttribution = "Google"
 
 
     
-map1 = folium.Map(location=[57.22, 25.42], zoom_start=9, tiles = None)
+map1 = folium.Map(location=[57.22, 25.42], zoom_start=9, tiles = None, fileSizeLimit=9999 )
 fg=folium.FeatureGroup(name='Dzīvotnes kartējums', show=True)
 map1.add_child(fg)
 folium.raster_layers.ImageOverlay(
@@ -92,6 +91,21 @@ folium.raster_layers.ImageOverlay(
     control=True
     ).add_to(map1)
 map1.add_child(colormap)
+
+
+
+field_locations = r"Layers\Cesis_kad.geojson"
+
+road_locations = r"Layers\Cesis_road4.geojson"
+
+fgi=folium.FeatureGroup(name='Kadastri', show=True)
+map1.add_child(fgi)
+folium.GeoJson(field_locations, name='Kadastri', 
+               tooltip=folium.GeoJsonTooltip(fields=['KAD']), show = False
+               ).add_to(map1)
+
+folium.GeoJson(road_locations, name='Ceļi',  show = False
+               ).add_to(map1)        
 
 folium.TileLayer('stamentoner',name='OSM melnbalts', show = True).add_to(map1)
 folium.TileLayer(tiles = tiles,name='Google satelīts', attr=EsriAttribution).add_to(map1)
